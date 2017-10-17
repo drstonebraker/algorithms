@@ -62,6 +62,20 @@ class RingBuffer
     @store[index] = val
   end
 
+  def max
+    max = -1.0 / 0
+    i = 0
+
+    while i < @length
+      idx = buffer_idx(i)
+      el = @store[idx]
+      max = el if el > max
+      i += 1
+    end
+
+    max
+  end
+
   protected
   attr_accessor :capacity, :start_idx, :store
   attr_writer :length
