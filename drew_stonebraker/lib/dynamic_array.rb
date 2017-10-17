@@ -58,7 +58,7 @@ class DynamicArray
   def resize!
     new_arr = StaticArray.new(@capacity * 2)
     i = 0
-    # debugger
+
     while i < @length
       new_arr[i] = @arr[i]
       i += 1
