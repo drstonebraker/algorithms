@@ -5,7 +5,7 @@ class DynamicArray
   attr_reader :length
 
   def initialize
-    capacity = 4
+    capacity = 8
     @store = StaticArray.new(capacity)
     @length = 0
     @capacity = capacity
