@@ -33,7 +33,7 @@ class DynamicArray
   # O(1) ammortized; O(n) worst case. Variable because of the possible
   # resize.
   def push(val)
-    resize! if @length >= @capacity
+    check_capacity!
     @length += 1
     @store[@length.pred] = val
   end
@@ -53,6 +53,14 @@ class DynamicArray
 
   # O(n): has to shift over all the elements.
   def unshift(val)
+    check_capacity!
+    i = @length
+    while i > 0
+      @store[@length] = @store[@length.pred]
+      i -= 1
+    end
+
+    @store[0] = val
   end
 
   protected
@@ -60,6 +68,10 @@ class DynamicArray
   attr_writer :length
 
   def check_index(index)
+  end
+
+  def check_capacity!
+    resize! if @length >= @capacity
   end
 
   # O(n): has to copy over all the elements to the new store.
