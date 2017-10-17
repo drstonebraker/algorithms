@@ -4,39 +4,88 @@ class RingBuffer
   attr_reader :length
 
   def initialize
+    capacity = 8
+    @store = StaticArray.new(capacity)
+    @length = 0
+    @capacity = capacity
+    @start_idx = 0
   end
 
   # O(1)
   def [](index)
+    index = buffer_idx(index)
+    check_index(index)
+    @store[index]
   end
 
   # O(1)
   def []=(index, val)
+    index = buffer_idx(index)
+    check_index(index)
+    @store[index] = value
   end
 
   # O(1)
   def pop
+    index = buffer_idx(@length.pred)
+    check_index(index)
+    @length -= 1
+    @store[index]
   end
 
   # O(1) ammortized
   def push(val)
+    index = buffer_idx(@length)
+    check_capacity!
+    @length += 1
+    @store[index] = val
   end
 
   # O(1)
   def shift
+    check_index(@start_idx)
+    first = @store[@start_idx]
+
+    @length -= 1
+    @start_idx += 1
+    first
   end
 
   # O(1) ammortized
   def unshift(val)
+    check_capacity!
+
+    @length += 1
+    @start_idx -= 1
+    @store[@start_idx] = val
   end
 
   protected
   attr_accessor :capacity, :start_idx, :store
   attr_writer :length
 
+  def buffer_idx(idx)
+    (@start_idx + idx) % @capacity
+  end
+
   def check_index(index)
+    raise 'index out of bounds' unless (0...@length).include?(index)
+  end
+
+  def check_capacity!
+    resize! if @length >= @capacity
   end
 
   def resize!
+    new_arr = StaticArray.new(@capacity * 2)
+    i = @start_idx
+
+    while i < @length
+      idx = buffer_idx(i)
+      new_arr[i] = @store[idx]
+      i += 1
+    end
+    @capacity *= 2
+    @store = new_arr
   end
 end

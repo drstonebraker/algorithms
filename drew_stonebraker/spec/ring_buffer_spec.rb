@@ -1,4 +1,5 @@
 require "ring_buffer"
+require 'byebug'
 
 describe RingBuffer do
   it "starts out empty" do
@@ -17,6 +18,7 @@ describe RingBuffer do
     5.times { |i| expect(arr[i]) == i }
 
     4.downto(0) do |i|
+      # debugger
       expect(arr.pop).to eq(i)
     end
     expect(arr.length).to eq(0)
