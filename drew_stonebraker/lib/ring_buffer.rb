@@ -22,7 +22,7 @@ class RingBuffer
   def []=(index, val)
     index = buffer_idx(index)
     check_index(index)
-    @store[index] = value
+    @store[index] = val
   end
 
   # O(1)
