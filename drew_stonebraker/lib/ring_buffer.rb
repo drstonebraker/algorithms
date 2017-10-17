@@ -27,16 +27,16 @@ class RingBuffer
 
   # O(1)
   def pop
+    check_index(@length.pred)
     index = buffer_idx(@length.pred)
-    check_index(index)
     @length -= 1
     @store[index]
   end
 
   # O(1) ammortized
   def push(val)
-    index = buffer_idx(@length)
     check_capacity!
+    index = buffer_idx(@length)
     @length += 1
     @store[index] = val
   end

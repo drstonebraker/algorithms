@@ -76,7 +76,6 @@ describe RingBuffer do
 
     5.times do |i|
       expect(arr[i]).to eq(4-i)
-      debugger
       expect(arr[i+5]).to eq(i)
     end
 
