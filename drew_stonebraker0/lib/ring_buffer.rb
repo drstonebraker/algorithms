@@ -62,7 +62,7 @@ class RingBuffer
     @store[index] = val
   end
 
-  def max
+  def max_idx
     max = -1.0 / 0
     i = 0
 
