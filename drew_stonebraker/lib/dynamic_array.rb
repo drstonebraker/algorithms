@@ -1,4 +1,5 @@
 require_relative "static_array"
+require 'byebug'
 
 class DynamicArray
   attr_reader :length
@@ -26,15 +27,16 @@ class DynamicArray
   def pop
     raise 'cannot pop empty array' if @length == 0
     @length -= 1
-    @arr[@length.next]
+    p @arr
+    @arr[@length]
   end
 
   # O(1) ammortized; O(n) worst case. Variable because of the possible
   # resize.
   def push(val)
+    resize! if @length >= @capacity
     @length += 1
-    resize! if @length > @capacity
-    @arr[@length] = val
+    @arr[@length.pred] = val
   end
 
   # O(n): has to shift over all the elements.
@@ -56,7 +58,8 @@ class DynamicArray
   def resize!
     new_arr = StaticArray.new(@capacity * 2)
     i = 0
-    while i < @capacity
+    # debugger
+    while i < @length
       new_arr[i] = @arr[i]
       i += 1
     end
