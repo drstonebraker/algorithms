@@ -71,7 +71,7 @@ class RingBuffer
   end
 
   def check_index(index)
-    raise 'index out of bounds' unless (0...@length).include?(index)
+    raise 'index out of bounds' unless index.between?(0, @length)
   end
 
   def check_capacity!
