@@ -13,19 +13,19 @@ class DynamicArray
 
   # O(1)
   def [](index)
-    raise 'index out of bounds' unless (0...length).include?(index)
+    check_index(index)
     @store[index]
   end
 
   # O(1)
   def []=(index, value)
-    raise 'index out of bounds' unless (0...length).include?(index)
+    check_index(index)
     @store[index] = value
   end
 
   # O(1)
   def pop
-    raise 'cannot pop empty array' if @length == 0
+    check_index(@length.pred)
     @length -= 1
     @store[@length]
   end
@@ -40,6 +40,7 @@ class DynamicArray
 
   # O(n): has to shift over all the elements.
   def shift
+    check_index(0)
     first = @store[0]
     i = 0
     while i < @length.pred
@@ -56,10 +57,10 @@ class DynamicArray
     check_capacity!
     i = @length
     while i > 0
-      @store[@length] = @store[@length.pred]
+      @store[i] = @store[i.pred]
       i -= 1
     end
-
+    @length += 1
     @store[0] = val
   end
 
@@ -68,6 +69,7 @@ class DynamicArray
   attr_writer :length
 
   def check_index(index)
+    raise 'index out of bounds' unless (0...@length).include?(index)
   end
 
   def check_capacity!
