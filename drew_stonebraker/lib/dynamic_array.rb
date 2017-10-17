@@ -18,6 +18,8 @@ class DynamicArray
 
   # O(1)
   def []=(index, value)
+    raise 'index out of bounds' unless (0...length).include?(index)
+    @arr[index] = value
   end
 
   # O(1)
@@ -27,6 +29,9 @@ class DynamicArray
   # O(1) ammortized; O(n) worst case. Variable because of the possible
   # resize.
   def push(val)
+    @length += 1
+    resize! if @length > @capacity
+    @arr[@length] = val
   end
 
   # O(n): has to shift over all the elements.
@@ -46,5 +51,13 @@ class DynamicArray
 
   # O(n): has to copy over all the elements to the new store.
   def resize!
+    new_arr = StaticArray.new(@capacity * 2)
+    i = 0
+    while i < @capacity
+      new_arr[i] = @arr[i]
+      i += 1
+    end
+    @capacity *= 2
+    @arr = new_arr
   end
 end

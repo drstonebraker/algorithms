@@ -8,12 +8,12 @@ class StaticArray
   # O(1)
   def [](index)
     raise 'Index not within bounds of static array' unless (0...@length).include?(index)
-    @arr[index]
+    @store[index]
   end
 
   # O(1)
   def []=(index, value)
-    @arr[index] = value
+    @store[index] = value
   end
 
   protected
