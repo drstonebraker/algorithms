@@ -29,6 +29,7 @@ describe RingBuffer do
 
     5.times { |i| arr.unshift(i) }
     expect(arr.length).to eq(5)
+
     5.times { |i| expect(arr[i]).to eq(4 - i) }
 
     4.downto(0) do |i|

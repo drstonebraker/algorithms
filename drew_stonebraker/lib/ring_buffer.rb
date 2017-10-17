@@ -13,8 +13,8 @@ class RingBuffer
 
   # O(1)
   def [](index)
-    index = buffer_idx(index)
     check_index(index)
+    index = buffer_idx(index)
     @store[index]
   end
 
@@ -43,8 +43,9 @@ class RingBuffer
 
   # O(1)
   def shift
-    check_index(@start_idx)
-    first = @store[@start_idx]
+    check_index(0)
+    index = buffer_idx(0)
+    first = @store[index]
 
     @length -= 1
     @start_idx += 1
@@ -57,7 +58,8 @@ class RingBuffer
 
     @length += 1
     @start_idx -= 1
-    @store[@start_idx] = val
+    index = buffer_idx(0)
+    @store[index] = val
   end
 
   protected
