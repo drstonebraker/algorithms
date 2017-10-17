@@ -6,7 +6,7 @@ class DynamicArray
 
   def initialize
     capacity = 4
-    @arr = StaticArray.new(capacity)
+    @store = StaticArray.new(capacity)
     @length = 0
     @capacity = capacity
   end
@@ -14,21 +14,20 @@ class DynamicArray
   # O(1)
   def [](index)
     raise 'index out of bounds' unless (0...length).include?(index)
-    @arr[index]
+    @store[index]
   end
 
   # O(1)
   def []=(index, value)
     raise 'index out of bounds' unless (0...length).include?(index)
-    @arr[index] = value
+    @store[index] = value
   end
 
   # O(1)
   def pop
     raise 'cannot pop empty array' if @length == 0
     @length -= 1
-    p @arr
-    @arr[@length]
+    @store[@length]
   end
 
   # O(1) ammortized; O(n) worst case. Variable because of the possible
@@ -36,11 +35,20 @@ class DynamicArray
   def push(val)
     resize! if @length >= @capacity
     @length += 1
-    @arr[@length.pred] = val
+    @store[@length.pred] = val
   end
 
   # O(n): has to shift over all the elements.
   def shift
+    first = @store[0]
+    i = 0
+    while i < @length.pred
+      @store[i] = @store[i.next]
+      i += 1
+    end
+
+    @length -= 1
+    first
   end
 
   # O(n): has to shift over all the elements.
@@ -60,10 +68,10 @@ class DynamicArray
     i = 0
 
     while i < @length
-      new_arr[i] = @arr[i]
+      new_arr[i] = @store[i]
       i += 1
     end
     @capacity *= 2
-    @arr = new_arr
+    @store = new_arr
   end
 end
