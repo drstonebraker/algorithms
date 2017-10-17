@@ -24,6 +24,9 @@ class DynamicArray
 
   # O(1)
   def pop
+    raise 'cannot pop empty array' if @length == 0
+    @length -= 1
+    @arr[@length.next]
   end
 
   # O(1) ammortized; O(n) worst case. Variable because of the possible
