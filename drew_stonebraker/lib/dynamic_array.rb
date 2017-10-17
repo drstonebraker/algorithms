@@ -4,10 +4,16 @@ class DynamicArray
   attr_reader :length
 
   def initialize
+    capacity = 4
+    @arr = StaticArray.new(capacity)
+    @length = 0
+    @capacity = capacity
   end
 
   # O(1)
   def [](index)
+    raise 'index out of bounds' unless (0...length).include?(index)
+    @arr[index]
   end
 
   # O(1)
