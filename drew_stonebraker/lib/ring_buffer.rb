@@ -80,7 +80,7 @@ class RingBuffer
 
   def resize!
     new_arr = StaticArray.new(@capacity * 2)
-    p i = @start_idx
+    i = 0
 
     while i < @length
       idx = buffer_idx(i)
@@ -88,6 +88,7 @@ class RingBuffer
       i += 1
     end
     @capacity *= 2
+    @start_idx = 0
     @store = new_arr
   end
 end
