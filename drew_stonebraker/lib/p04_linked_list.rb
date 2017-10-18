@@ -71,6 +71,7 @@ class LinkedList
   end
 
   def remove(key)
+    find_by_key(key).remove
   end
 
   def each(&prc)
