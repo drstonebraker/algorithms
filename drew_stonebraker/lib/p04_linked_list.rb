@@ -64,7 +64,7 @@ class LinkedList
 
   def update(key, val)
     node = find{|node| node.key == key}
-    node.val = val
+    node.val = val if node
   end
 
   def remove(key)
