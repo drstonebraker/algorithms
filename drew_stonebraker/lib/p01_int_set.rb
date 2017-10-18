@@ -71,8 +71,8 @@ class ResizingIntSet
   end
 
   def insert(num)
-    resize! if @store[num].length >= 6
-    @store[num] << num
+    resize! if self[num].length >= 6
+    self[num] << num
   end
 
   def remove(num)
