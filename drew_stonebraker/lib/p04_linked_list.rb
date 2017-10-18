@@ -48,6 +48,8 @@ class LinkedList
   end
 
   def get(key)
+    node = find_by_key(key)
+    node && node.val
   end
 
   def include?(key)
@@ -63,7 +65,7 @@ class LinkedList
   end
 
   def update(key, val)
-    node = find{|node| node.key == key}
+    node = find_by_key(key)
     node.val = val if node
   end
 
@@ -81,5 +83,11 @@ class LinkedList
 
   def to_s
     inject([]) { |acc, node| acc << "[#{node.key}, #{node.val}]" }.join(", ")
+  end
+
+  private
+
+  def find_by_key(key)
+    find{|node| node.key == key}
   end
 end
