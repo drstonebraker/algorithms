@@ -53,6 +53,7 @@ class LinkedList
   end
 
   def include?(key)
+    !get(key).nil?
   end
 
   def append(key, val)
