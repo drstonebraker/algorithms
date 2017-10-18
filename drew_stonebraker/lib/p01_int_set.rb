@@ -1,3 +1,5 @@
+require 'byebug'
+
 class MaxIntSet
   def initialize(max)
     @max = max
@@ -71,7 +73,7 @@ class ResizingIntSet
   end
 
   def insert(num)
-    resize! if self[num].length >= 6
+    resize! if count >= num_buckets
     bucket = self[num]
     unless bucket.include?(num)
       @count += 1
@@ -104,8 +106,8 @@ class ResizingIntSet
   def resize!
     flat_store = @store.flatten
     @store = Array.new(num_buckets * 2) { Array.new }
-
-    flat_store.each {|num| @store.insert(num)}
+    @count = 0
+    flat_store.each {|num| self.insert(num)}
     nil
   end
 end
