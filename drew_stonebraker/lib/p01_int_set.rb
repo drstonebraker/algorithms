@@ -71,18 +71,24 @@ class ResizingIntSet
   end
 
   def insert(num)
+    resize! if @store[num].length >= 6
+    @store[num] << num
   end
 
   def remove(num)
+    bucket = self[num]
+    bucket.delete(num)
   end
 
   def include?(num)
+    self[num].include?(num)
   end
 
   private
 
   def [](num)
     # optional but useful; return the bucket corresponding to `num`
+    @store[num % num_buckets]
   end
 
   def num_buckets
@@ -90,5 +96,10 @@ class ResizingIntSet
   end
 
   def resize!
+    flat_store = @store.flatten
+    @store = Array.new(num_buckets * 2) { Array.new }
+
+    flat_store.each {|num| @store.insert(num)}
+    nil
   end
 end
