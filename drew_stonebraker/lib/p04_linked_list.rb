@@ -64,7 +64,13 @@ class LinkedList
   def remove(key)
   end
 
-  def each
+  def each(&prc)
+    current = first
+    while current.key
+      prc.call(current)
+      current = current.next
+    end
+    self
   end
 
   # uncomment when you have `each` working and `Enumerable` included
