@@ -72,11 +72,17 @@ class ResizingIntSet
 
   def insert(num)
     resize! if self[num].length >= 6
-    self[num] << num
+    bucket = self[num]
+    unless bucket.include?(num)
+      @count += 1
+      bucket << num
+    end
+    num
   end
 
   def remove(num)
     bucket = self[num]
+    @count -= 1
     bucket.delete(num)
   end
 
