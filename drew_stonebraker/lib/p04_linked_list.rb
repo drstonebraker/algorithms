@@ -1,3 +1,5 @@
+require 'byebug'
+
 class Node
   attr_accessor :key, :val, :next, :prev
 
@@ -54,7 +56,10 @@ class LinkedList
   def append(key, val)
     node = Node.new(key, val)
     last.next = node
+    node.prev = last
     @tail.prev = node
+    node.next = @tail
+    node
   end
 
   def update(key, val)
