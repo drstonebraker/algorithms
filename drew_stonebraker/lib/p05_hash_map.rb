@@ -67,7 +67,7 @@ class HashMap
     self.each do |k, v|
       new_hash_map[k] = v
     end
-    self.store = new_hash_map.store
+    @store = new_hash_map.store
     nil
   end
 
