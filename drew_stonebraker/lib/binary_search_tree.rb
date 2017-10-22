@@ -66,7 +66,7 @@ class BinarySearchTree
   end
 
   def depth(tree_node = @root)
-    return 1 if tree_node.num_children.zero?
+    return 0 if tree_node.nil? || tree_node.num_children.zero?
 
     1 + [depth(tree_node.left), depth(tree_node.right)].max
   end
