@@ -26,12 +26,13 @@ class BinarySearchTree
 
   def find(value, tree_node = @root)
     return nil if tree_node.nil?
-    if value == tree_node.value
+    new_node = value.is_a?(BSTNode) ? value : BSTNode.new(value)
+    if new_node.value == tree_node.value
       tree_node
-    elsif value < tree_node.value
-      find(value, tree_node.left)
+    elsif new_node.value < tree_node.value
+      find(new_node.value, tree_node.left)
     else
-      find(value, tree_node.right)
+      find(new_node.value, tree_node.right)
     end
 
   end
