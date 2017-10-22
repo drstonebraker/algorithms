@@ -16,7 +16,7 @@ class BSTNode
 
   def ==(comparator)
     return false if comparator.nil?
-    @value == comparator.is_a?(BSTNode) ? comparator.value : comparator
+    @value == (comparator.is_a?(BSTNode) ? comparator.value : comparator)
   end
 
   def is_left?
