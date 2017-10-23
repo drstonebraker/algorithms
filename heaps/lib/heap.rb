@@ -2,19 +2,28 @@ class BinaryMinHeap
   attr_reader :store, :prc
 
   def initialize(&prc)
+    @store = []
     @prc = prc || Proc.new {|a, b| a <=> b}
   end
 
   def count
+    @store.length
   end
 
   def extract
+    min = @store.first
+    @store[0] = @store.pop
+    BinaryMinHeap.heapify_down(@store, 0, count, &@prc)
+    min
   end
 
   def peek
+    @store.first
   end
 
   def push(val)
+    @store << val
+    BinaryMinHeap.heapify_up(@store, count.pred, count, &@prc)
   end
 
   public
