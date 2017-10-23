@@ -29,6 +29,22 @@ class BinaryMinHeap
   end
 
   def self.heapify_down(array, parent_idx, len = array.length, &prc)
+    child_indices = BinaryMinHeap.child_indices(array.length, parent_idx)
+    children = child_indices.map {|idx| array[idx]}
+    val = array[parent_index]
+    while @prc.call(val, children.max) > 0
+      if @prc.call(val, children.first)
+        array[parent_index], array[child_indices.first] = children.first, val
+        parent_idx = child_indices.first
+      else
+        array[parent_index], array[child_indices.last] = children.last, val
+        parent_idx = child_indices.last
+      end
+
+      child_indices = BinaryMinHeap.child_indices(array.length, parent_idx)
+      children = child_indices.map {|idx| array[idx]}
+      val = array[parent_index]
+    end
   end
 
   def self.heapify_up(array, child_idx, len = array.length, &prc)
