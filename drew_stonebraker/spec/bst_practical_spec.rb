@@ -1,4 +1,5 @@
 require 'rspec'
+require 'binary_search_tree'
 require 'bst_practical'
 
 describe 'BST Practical Question' do
@@ -28,7 +29,7 @@ describe 'BST Practical Question' do
     expect(kth_largest(prefilled_bst.root, k)).to be(k_node)
 
 
-    n = 2 
+    n = 2
     n_node = balanced_bst.root.right
     # the above node is pointing to the node with value 16
 
