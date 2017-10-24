@@ -4,24 +4,26 @@ class Vertex
 
   def initialize(value)
     @value = value
-    @in_edges = Set.new
-    @out_edges = Set.new
+    @in_edges = []
+    @out_edges = []
   end
 end
 
 class Edge
+  attr_reader :from_vertex, :to_vertex, :cost
+
   def initialize(from_vertex, to_vertex, cost = 1)
-    from_vertex.out_edges.add(self)
-    to_vertex.in_edges.add(self)
-    @from = from_vertex
-    @to = to_vertex
+    from_vertex.out_edges << self
+    to_vertex.in_edges << self
+    @from_vertex = from_vertex
+    @to_vertex = to_vertex
     @cost = cost
   end
 
   def destroy!
-    @from.out_edges.remove(self)
-    @to.in_edges.remove(self)
-    @from = nil
-    @to = nil
+    @from_vertex.out_edges.delete(self)
+    @to_vertex.in_edges.delete(self)
+    @from_vertex = nil
+    @to_vertex = nil
   end
 end
