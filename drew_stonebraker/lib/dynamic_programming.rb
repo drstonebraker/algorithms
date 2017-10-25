@@ -4,10 +4,23 @@ class DynamicProgramming
     @blair_nums = {1 => 1, 2 => 2}
   end
 
+  # def blair_nums(n)
+  #   return @blair_nums[n] if @blair_nums[n]
+  #   result = blair_nums(n - 1) + blair_nums(n - 2) + blair_odd(n)
+  #   @blair_nums[n] = result
+  # end
+
   def blair_nums(n)
-    return @blair_nums[n] if @blair_nums[n]
-    result = blair_nums(n - 1) + blair_nums(n - 2) + blair_odd(n)
-    @blair_nums[n] = result
+    cache = blair_cache_builder(n)
+    cache[n]
+  end
+
+  def blair_cache_builder(n)
+    cache = {1 => 1, 2 => 2}
+    (3..n).each do |val|
+      cache[val] = cache[val - 1] + cache[val - 2] + blair_odd(n)
+    end
+    cache
   end
 
   def blair_odd(k)
