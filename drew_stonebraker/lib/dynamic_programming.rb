@@ -18,7 +18,7 @@ class DynamicProgramming
   def blair_cache_builder(n)
     cache = {1 => 1, 2 => 2}
     (3..n).each do |val|
-      cache[val] = cache[val - 1] + cache[val - 2] + blair_odd(n)
+      cache[val] = cache[val - 1] + cache[val - 2] + blair_odd(val)
     end
     cache
   end
