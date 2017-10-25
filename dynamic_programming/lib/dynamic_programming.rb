@@ -131,7 +131,7 @@ class DynamicProgramming
       end
     end
 
-    # table.each {|line| p line}
+    table.each {|line| p line}
 
     table
   end
