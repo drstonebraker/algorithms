@@ -7,6 +7,10 @@ class Vertex
     @in_edges = []
     @out_edges = []
   end
+
+  def inspect
+    "#<Vertex: @value=#{@value.inspect}"
+  end
 end
 
 class Edge
@@ -21,9 +25,14 @@ class Edge
   end
 
   def destroy!
+    # debugger
     @from_vertex.out_edges.delete(self)
     @to_vertex.in_edges.delete(self)
     @from_vertex = nil
     @to_vertex = nil
   end
+
+  # def inspect
+  #   "#<Edge: @from_vertex=#{@from_vertex.inspect} @to_vertex"
+  # end
 end
