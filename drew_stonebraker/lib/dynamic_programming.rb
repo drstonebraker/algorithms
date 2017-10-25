@@ -52,15 +52,15 @@ class DynamicProgramming
   end
 
   def frog_hops_top_down(n)
-    return @frog_hops[n] if @frog_hops[n]
-
-    @frog_hops[val] = [1, 2, 3].flat_map do |first_hop|
-      frog_hops_top_down(val - first_hop).map {|hops| [first_hop] + hops}
-    end
+    @frog_hops[n] = frog_hops_top_down_helper(n)
   end
 
   def frog_hops_top_down_helper(n)
+    return @frog_hops[n] if @frog_hops[n]
 
+    [1, 2, 3].flat_map do |first_hop|
+      frog_hops_top_down_helper(n - first_hop).map {|hops| [first_hop] + hops}
+    end
   end
 
   def super_frog_hops(n, k)
