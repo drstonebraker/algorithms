@@ -105,6 +105,8 @@ class DynamicProgramming
   end
 
   def knapsack(weights, values, capacity)
+    mapped_weights = weights.zip(values).sort
+
 
   end
 
