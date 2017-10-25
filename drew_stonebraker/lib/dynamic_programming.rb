@@ -28,11 +28,22 @@ class DynamicProgramming
   end
 
   def frog_hops_bottom_up(n)
-
+    cache = frog_cache_builder(n)
+    cache[n]
   end
 
   def frog_cache_builder(n)
-
+    cache = {
+      1 => [[1]],
+      2 => [[1,1], [2]],
+      3 => [[1,1,1], [1,2], [2,1], [3]]
+    }
+    (4..n).each do |val|
+      cache[val] = [1, 2, 3].flat_map do |first_hop|
+        cache[val - first_hop].map {|hops| [first_hop] + hops}
+      end
+    end
+    cache
   end
 
   def frog_hops_top_down(n)
