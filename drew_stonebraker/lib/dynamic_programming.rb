@@ -1,3 +1,5 @@
+require 'byebug'
+
 class DynamicProgramming
 
   def initialize
@@ -6,6 +8,10 @@ class DynamicProgramming
       1 => [[1]],
       2 => [[1,1], [2]],
       3 => [[1,1,1], [1,2], [2,1], [3]]
+    }
+    @super_frog_hops = {
+      0 => [[]],
+      1 => [[1]]
     }
   end
 
@@ -64,7 +70,38 @@ class DynamicProgramming
   end
 
   def super_frog_hops(n, k)
+    return @super_frog_hops[n] if @super_frog_hops[n]
 
+    @super_frog_hops[n] = (1..k).flat_map do |first_hop|
+      if first_hop > n
+        []
+      else
+        super_frog_hops(n - first_hop, k).map {|hops| [first_hop] + hops}
+      end
+    end
+  end
+
+  def super_frog_hops(n, k)
+    cache = super_frog_cache_builder(n, k)
+    cache[n]
+  end
+
+  def super_frog_cache_builder(input, k)
+    cache = {
+      0 => [[]],
+      1 => [[1]]
+    }
+
+    (2..input).each do |n|
+      cache[n] = (1..k).flat_map do |first_hop|
+        if first_hop > n
+          []
+        else
+          cache[n - first_hop].map {|hops| [first_hop] + hops}
+        end
+      end
+    end
+    cache
   end
 
   def knapsack(weights, values, capacity)
