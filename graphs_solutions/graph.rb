@@ -1,26 +1,21 @@
 class Vertex
-  attr_reader :value
-  attr_accessor :in_edges, :out_edges
+  attr_accessor :in_edges, :out_edges, :value
 
-  def initialize(value)
+  def initialize(value=nil)
     @value = value
     @in_edges = []
     @out_edges = []
   end
-
-  def inspect
-    "#<Vertex: @value=#{@value.inspect}"
-  end
 end
 
 class Edge
-  attr_reader :from_vertex, :to_vertex, :cost
+  attr_accessor :cost, :from_vertex, :to_vertex
 
   def initialize(from_vertex, to_vertex, cost = 1)
-    from_vertex.out_edges << self
-    to_vertex.in_edges << self
     @from_vertex = from_vertex
     @to_vertex = to_vertex
+    @from_vertex.out_edges.push(self)
+    @to_vertex.in_edges.push(self)
     @cost = cost
   end
 
@@ -30,8 +25,4 @@ class Edge
     @from_vertex = nil
     @to_vertex = nil
   end
-
-  # def inspect
-  #   "#<Edge: @from_vertex=#{@from_vertex.inspect} @to_vertex"
-  # end
 end
