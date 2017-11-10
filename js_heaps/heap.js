@@ -51,5 +51,16 @@ class BinaryMinHeap {
     this.heapifyDown(swapIdx)
   }
 
+  heapifyUp(fromIdx) {
+    const parentIdx = this.parentIdx(fromIdx)
+    if (!parentIdx) return
+    const parentVal = this.store[parentIdx]
+    const currentVal = this.store[fromIdx]
+
+    if (this.sortFn(currentVal, parentVal) < 0) {
+      [this.store[parentIdx], this.store[fromIdx]] = [currentVal, parentVal]
+    }
+  }
+
 
 }
