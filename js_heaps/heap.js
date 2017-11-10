@@ -59,6 +59,7 @@ class BinaryMinHeap {
 
     if (this.sortFn(currentVal, parentVal) < 0) {
       [this.store[parentIdx], this.store[fromIdx]] = [currentVal, parentVal]
+      this.heapifyUp(parentIdx)
     }
   }
 
