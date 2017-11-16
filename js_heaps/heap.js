@@ -63,5 +63,16 @@ class BinaryMinHeap {
     }
   }
 
+  push(val) {
+    this.store.push(val)
+    heapifyUp(this.count() - 1)
+    return this
+  }
+
+  peek() {
+
+  }
+  
+
 
 }
