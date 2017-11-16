@@ -65,14 +65,24 @@ class BinaryMinHeap {
 
   push(val) {
     this.store.push(val)
-    heapifyUp(this.count() - 1)
+    this.heapifyUp(this.count() - 1)
     return this
   }
 
   peek() {
-
+    if (this.count() === 0) throw new Error('Heap is empty')
+    return this.store[0]
   }
-  
+
+  extract() {
+    if (this.count() === 0) throw new Error('No element to extract')
+
+    [this.store[0], this.store[this.count() - 1]] = [this.store[this.count() - 1], this.store[0]]
+    const result = this.store.pop()
+    if (this.count() > 0) this.heapifyDown(0)
+    return result
+  }
+
 
 
 }
