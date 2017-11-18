@@ -1,6 +1,6 @@
 class BinaryMinHeap {
   constructor(sortFn) {
-    this.sortFn = sortFn || (a, b) => a - b
+    this.sortFn = sortFn || ((a, b) => a - b)
     this.store = []
   }
 
@@ -83,6 +83,6 @@ class BinaryMinHeap {
     return result
   }
 
-
-
 }
+
+module.exports = BinaryMinHeap
