@@ -52,8 +52,9 @@ class BinaryMinHeap {
   }
 
   heapifyUp(fromIdx) {
+    debugger
     const parentIdx = this.parentIdx(fromIdx)
-    if (!parentIdx) return
+    if (parentIdx === undefined) return
     const parentVal = this.store[parentIdx]
     const currentVal = this.store[fromIdx]
 

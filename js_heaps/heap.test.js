@@ -6,6 +6,21 @@ describe('BinaryMinHeap', () => {
       const heap = new BinaryMinHeap()
       expect(heap.store).toEqual([])
     })
+
+    test('pushes correctly', () => {
+      const heap = new BinaryMinHeap()
+      heap.push(7)
+      expect(heap.store).toEqual([7])
+
+      heap.push(5)
+      expect(heap.store).toEqual([5,7])
+
+      heap.push(6)
+      expect(heap.store).toEqual([5,7,6])
+
+      heap.push(4)
+      expect(heap.store).toEqual([4,5,6,7])
+    })
   })
 
   describe('indexing functions', () => {
