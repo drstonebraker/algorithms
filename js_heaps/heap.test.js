@@ -46,7 +46,13 @@ describe('BinaryMinHeap', () => {
       expect(bmh20.parentIdx(1)).toEqual(0)
       expect(bmh20.parentIdx(0)).toEqual(null)
     })
+  })
 
-
+  describe('heapify up and down', () => {
+    test('heapifyDowns correctly', () => {
+      const bmh = new BinaryMinHeap()
+      bmh.store = [7,4,5]
+      expect(bmh.heapifyDown(0).store).toEqual([4,7,5])
+    })
   })
 })

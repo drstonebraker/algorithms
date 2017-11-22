@@ -24,18 +24,17 @@ class BinaryMinHeap {
   }
 
   heapifyDown(parentIdx)  {
-    const childIdxs = this.childIndices(parent)
+    const childIdxs = this.childIndices(parentIdx)
     const children = childIdxs
       .map(idx => this.store[idx])
     const parent = this.store[parentIdx]
     const minChild = Math.min(...children)
-    const minIdx = childIdxs.find(idx => this.store)
 
     if (
-      childIndices(parent).length == 0
+      childIdxs.length == 0
       || this.sortFn(minChild, parent) > 0
     ) {
-      return
+      return this
     }
 
     const [left, right] = children
@@ -49,6 +48,7 @@ class BinaryMinHeap {
     [this.store[rightIdx], this.store[parentIdx]] = [this.store[parentIdx], this.store[rightIdx]]
 
     this.heapifyDown(swapIdx)
+    return this
   }
 
   heapifyUp(fromIdx) {
