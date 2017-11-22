@@ -28,7 +28,7 @@ describe('BinaryMinHeap', () => {
     beforeEach(() => {
       bmh20 = new BinaryMinHeap()
       for (var i = 0; i < 6; i++) {
-        bmh20.push(i)
+        bmh20.store[i] = i
       }
     })
 
@@ -36,6 +36,15 @@ describe('BinaryMinHeap', () => {
       expect(bmh20.childIndices(0)).toEqual([1, 2])
       expect(bmh20.childIndices(1)).toEqual([3,4])
       expect(bmh20.childIndices(2)).toEqual([5])
+    })
+
+    test('calculates parent indices correctly', () => {
+      expect(bmh20.parentIdx(5)).toEqual(2)
+      expect(bmh20.parentIdx(4)).toEqual(1)
+      expect(bmh20.parentIdx(3)).toEqual(1)
+      expect(bmh20.parentIdx(2)).toEqual(0)
+      expect(bmh20.parentIdx(1)).toEqual(0)
+      expect(bmh20.parentIdx(0)).toEqual(null)
     })
 
 
