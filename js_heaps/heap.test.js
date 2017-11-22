@@ -28,7 +28,7 @@ describe('BinaryMinHeap', () => {
     beforeEach(() => {
       bmh20 = new BinaryMinHeap()
       for (var i = 0; i < 20; i++) {
-        bmh20.store[i]
+        bmh20.push(i)
       }
     })
 
