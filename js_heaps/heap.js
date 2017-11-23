@@ -39,13 +39,9 @@ class BinaryMinHeap {
 
     const [left, right] = children
     const [leftIdx, rightIdx] = childIdxs
-    let swapIdx
-    if (minChild === left) {
-      swapIdx = leftIdx
-    } else {
-      swapIdx = rightIdx
-    }
-    [this.store[rightIdx], this.store[parentIdx]] = [this.store[parentIdx], this.store[rightIdx]]
+    const swapIdx = minChild === left ? leftIdx : rightIdx;
+
+    [this.store[swapIdx], this.store[parentIdx]] = [this.store[parentIdx], this.store[swapIdx]]
 
     this.heapifyDown(swapIdx)
     return this
