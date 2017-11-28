@@ -28,7 +28,9 @@ class BinaryMinHeap {
     const children = childIdxs
       .map(idx => this.store[idx])
     const parent = this.store[parentIdx]
-    const minChild = Math.min(...children)
+    const minChild = Math[this.sortFn(1,2) < 0 ? 'min' : 'max'](...children)
+
+    debugger
 
     if (
       childIdxs.length == 0

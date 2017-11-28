@@ -75,6 +75,7 @@ describe('BinaryMinHeap', () => {
       bmh.store = [1,5,4,3]
       bmh.heapifyDown(0)
       expect(bmh.store).toEqual([5,3,4,1])
+      
     })
 
     test('heapifyUps with comparison function', () => {
