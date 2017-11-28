@@ -12,7 +12,7 @@ class BinaryMinHeap {
     const double = idx * 2
     const leftIdx = double + 1
     const rightIdx = double + 2
-    return [leftIdx, rightIdx].filter(idx => this.isInRange(idx))
+    return [leftIdx, rightIdx].filter(newIdx => this.isInRange(newIdx))
   }
 
   isInRange(idx) {
@@ -41,7 +41,8 @@ class BinaryMinHeap {
     const [leftIdx, rightIdx] = childIdxs
     const swapIdx = minChild === left ? leftIdx : rightIdx;
 
-    [this.store[swapIdx], this.store[parentIdx]] = [this.store[parentIdx], this.store[swapIdx]]
+    [this.store[swapIdx], this.store[parentIdx]] 
+    = [this.store[parentIdx], this.store[swapIdx]]
 
     this.heapifyDown(swapIdx)
     return this
@@ -54,7 +55,8 @@ class BinaryMinHeap {
     const currentVal = this.store[fromIdx]
 
     if (this.sortFn(currentVal, parentVal) < 0) {
-      [this.store[parentIdx], this.store[fromIdx]] = [currentVal, parentVal]
+      [this.store[parentIdx], this.store[fromIdx]] 
+      = [currentVal, parentVal]
       this.heapifyUp(parentIdx)
     }
   }
@@ -73,7 +75,8 @@ class BinaryMinHeap {
   extract() {
     if (this.count() === 0) throw new Error('No element to extract')
 
-    [this.store[0], this.store[this.count() - 1]] = [this.store[this.count() - 1], this.store[0]]
+    [this.store[0], this.store[this.count() - 1]] 
+    = [this.store[this.count() - 1], this.store[0]]
     const result = this.store.pop()
     if (this.count() > 0) this.heapifyDown(0)
     return result
