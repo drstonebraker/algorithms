@@ -75,11 +75,17 @@ describe('BinaryMinHeap', () => {
       bmh.store = [1,5,4,3]
       bmh.heapifyDown(0)
       expect(bmh.store).toEqual([5,3,4,1])
-      
     })
 
     test('heapifyUps with comparison function', () => {
+      const bmh = new BinaryMinHeap((a,b) => b - a)
+      bmh.store = [2,1,3]
+      bmh.heapifyUp(2)
+      expect(bmh.store).toEqual([3,1,2])
 
+      bmh.store = [4,3,1,5]
+      bmh.heapifyUp(3)
+      expect(bmh.store).toEqual([5,4,1,3])
     })
   })
 })
