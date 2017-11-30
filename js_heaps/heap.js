@@ -39,9 +39,9 @@ class BinaryMinHeap {
 
     const [left, right] = children
     const [leftIdx, rightIdx] = childIdxs
-    const swapIdx = minChild === left ? leftIdx : rightIdx;
+    const swapIdx = minChild === left ? leftIdx : rightIdx
 
-    [this.store[swapIdx], this.store[parentIdx]] 
+    ;[this.store[swapIdx], this.store[parentIdx]] 
     = [this.store[parentIdx], this.store[swapIdx]]
 
     this.heapifyDown(swapIdx)
@@ -75,7 +75,7 @@ class BinaryMinHeap {
   extract() {
     if (this.count() === 0) throw new Error('No element to extract')
 
-    [this.store[0], this.store[this.count() - 1]] 
+    ;[this.store[0], this.store[this.count() - 1]] 
     = [this.store[this.count() - 1], this.store[0]]
     const result = this.store.pop()
     if (this.count() > 0) this.heapifyDown(0)

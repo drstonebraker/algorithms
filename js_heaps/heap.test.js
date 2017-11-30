@@ -21,6 +21,16 @@ describe('BinaryMinHeap', () => {
       heap.push(4)
       expect(heap.store).toEqual([4,5,6,7])
     })
+
+    test('extracts correctly', () => {
+      const bmh = new BinaryMinHeap()
+      ;[7,5,6,4].forEach(num => bmh.push(num))
+      expect(bmh.extract()).toEqual(4)
+      expect(bmh.store).toEqual([5,7,6])
+
+      expect(bmh.extract()).toEqual(5)
+      expect(bmh.store).toEqual([6,7])
+    })
   })
 
   describe('indexing functions', () => {
