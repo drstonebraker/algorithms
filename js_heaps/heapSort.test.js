@@ -13,5 +13,11 @@ describe('Array', () => {
       arr = arr.heapSort()
       expect(arr).toEqual([1,2,3,4,5])
     })
+
+    test("doesn't sort a sorted array", () => {
+      let arr = [1,2,3,4,5]
+      arr = arr.heapSort()
+      expect(arr).toEqual([1,2,3,4,5])
+    })
   })
 })
