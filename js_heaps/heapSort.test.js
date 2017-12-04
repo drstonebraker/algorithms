@@ -20,4 +20,12 @@ describe('Array', () => {
       expect(arr).toEqual([1,2,3,4,5])
     })
   })
+
+  describe('heapSort with a comparison function', () => {
+    test('sorts reversed', () => {
+      let arr = [2,5,1,6,2,3,4]
+      arr = arr.heapSort((a,b) => b - a)
+      expect(arr).toEqual([6,5,4,3,2,2,1])
+    })
+  })
 })
